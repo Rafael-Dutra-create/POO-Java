@@ -2,7 +2,7 @@ import java.util.Calendar;
 
 public class Empregado extends Pessoa{
 //    Atributos
-    private String matricula;
+    protected String matricula;
     private Calendar data_admissao, data_demissao;
 
 //    Métodos
@@ -11,7 +11,7 @@ public class Empregado extends Pessoa{
         gerarMatricula();
         data_admissao =  Calendar.getInstance();
     }
-    public void demitirEmpregado(){
+    protected void demitirEmpregado(){
         data_demissao = Calendar.getInstance();
     }
     protected void gerarMatricula(){
