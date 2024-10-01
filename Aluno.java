@@ -16,14 +16,14 @@ public Aluno(String nome, int idade) {
 }
 
 //  métodos
-    private void setNome(String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
     public String recuperarNome() {
         return nome;
     }
 
-    private void setidade(int idade) {
+    public void setidade(int idade) {
         this.idade = idade;
     }
     public int recuperarIdade() {
@@ -38,3 +38,5 @@ public Aluno(String nome, int idade) {
         System.out.println("Idade: "+a.recuperarIdade());
     }
 }
+
+
