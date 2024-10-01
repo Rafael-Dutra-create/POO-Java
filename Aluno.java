@@ -1,20 +1,12 @@
-import java.util.Random;
-
-public class Aluno {
+import java.util.Calendar;
+public class Aluno extends Pessoa{
 //    Atributos
-    private String nome;
-    private int idade;
-    private double codigo_identificador;
-    private Random aleatorio;
+    private String matricula;
 
 //    Construtor
-public Aluno(String nome, int idade) {
-    aleatorio = new Random();
-    this.nome = nome;
-    this.idade = idade;
-    this.codigo_identificador = aleatorio.nextDouble();
+public Aluno(String nome, Calendar data_nascimento, long CPF, Endereco endereco) {
+    super(nome, data_nascimento, CPF, endereco);
 }
-
 //  métodos
     public void setNome(String nome) {
         this.nome = nome;
@@ -30,13 +22,6 @@ public Aluno(String nome, int idade) {
         return idade;
     }
 
-
-    public static void main(String args[]){
-        Aluno a = new Aluno("Rafael", 26);
-
-        System.out.println("Nome: "+a.recuperarNome());
-        System.out.println("Idade: "+a.recuperarIdade());
-    }
 }
 
 

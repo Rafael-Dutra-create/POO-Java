@@ -24,9 +24,9 @@ public class Endereco {
         this.numero = numero;
     }
 
-    public static void main(String args[]){
-        Endereco e = new Endereco("Mendanha", 2854);
-        System.out.println("Nome da Rua: "+e.recuperarNomeRua());
-        System.out.println("Numero: "+e.recuperarNumero());
-    }
+//    public static void main(String args[]){
+//        Endereco e = new Endereco("Mendanha", 2854);
+//        System.out.println("Nome da Rua: "+e.recuperarNomeRua());
+//        System.out.println("Numero: "+e.recuperarNumero());
+//    }
 }
