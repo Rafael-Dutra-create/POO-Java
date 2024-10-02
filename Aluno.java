@@ -8,6 +8,11 @@ public Aluno(String nome, Calendar data_nascimento, long CPF, Endereco endereco)
     super(nome, data_nascimento, CPF, endereco);
 }
 //  métodos
+    @Override
+    public String toString() {
+    return String.format("%s(%s)", nome, data_nascimento);
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }

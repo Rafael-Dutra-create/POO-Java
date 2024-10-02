@@ -1,54 +1,77 @@
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class Escola {
-//    Atributos
+    //    Atributos
     private String nome, CNPJ;
     private Endereco endereco;
-    private Departamento departamentos [];
-    private Aluno discentes [];
+    private ArrayList<Departamento> departamentos;
+    private ArrayList<Aluno> discentes;
     private int nr_discentes, nr_departamentos;
 
-//Construtor
-    public Escola (String nome, String CNPJ){
+    //Construtor
+    public Escola(String nome, String CNPJ) {
         this.nome = nome;
         this.CNPJ = CNPJ;
-        this.departamentos = new Departamento[10];
-        this.discentes = new Aluno[1000];
+        this.departamentos = new ArrayList<>();
+        this.discentes = new ArrayList<>();
         this.nr_departamentos = 0;
         this.nr_discentes = 0;
     }
+
     //    métodos
-    public void criarDepartamento(String nomeDepartamento){
-        if(nr_departamentos <= 10){
-            departamentos[nr_departamentos] = new Departamento(nomeDepartamento);
+    public void criarDepartamento(String nomeDepartamento) {
+        if (nr_departamentos <= 10) {
+            departamentos.add(new Departamento(nomeDepartamento));
             nr_departamentos++;
-        }else{
+        } else {
             System.out.println("Não é possivel criar outro Departamento.");
         }
     }
+
+    public void fecharDepartamento(Departamento departamento) {
+        departamentos.remove(departamento);
+    }
+
     public void matricularAluno(Aluno novoAluno) {
         if (nr_discentes < 1000) {
-            discentes[nr_discentes] = novoAluno;
+            discentes.add(novoAluno);
             nr_discentes++;
         } else {
             System.out.println("Não é possível matricular mais alunos.");
         }
     }
 
-    public static void main(String args[]){
-//        Crir uma nova escola
-        Escola escola = new Escola("Estacio","12.345.678/0001-99");
-
-//        Criar novos alunos
-        Aluno aluno1 = new Aluno("Rafael", 26);
-        Aluno aluno2 = new Aluno("Daniele", 22);
-
-//        Matricula os alunos na escola
-        escola.matricularAluno(aluno1);
-        escola.matricularAluno(aluno2);
-
-//        Exemplo de como acessar dados dos alunos matriculados
-        for (int i = 0; i < escola.nr_discentes; i++) {
-            System.out.println("Nome: " + escola.discentes[i].recuperarNome());
-            System.out.println("Idade: " + escola.discentes[i].recuperarIdade());
-        }
+    public void trancarMatriculaAluno(Aluno aluno) {
+        discentes.remove(aluno);
     }
+
+    public void agruparAlunos() {
+//        Map<String, List<String>> agrupamento = new HashMap<>();
+//        for (Aluno a : discentes) {
+//            String idade = String.valueOf(a.recuperarIdade());
+//            agrupamento.putIfAbsent(idade, new ArrayList<>());
+//            agrupamento.get(idade).add(a.recuperarNome());
+//        }
+//        System.out.println("Resultado do agrupamento por idade: " + agrupamento);
+//    }
+//        Resultado do agrupamento por idade: {26=[Rafael, Daniele], 27=[Victor]} ---ok
+        Map<String, Set<String>> agrupamento =
+                discentes.stream().collect(Collectors.groupingBy(
+                        aluno -> String.valueOf(aluno.recuperarIdade()),
+                        Collectors.mapping(Aluno::recuperarNome, Collectors.toSet())
+                ));
+
+        System.out.println("Resultado do agrupamento por idade: ");
+        agrupamento.forEach((chave, conjunto) -> System.out.println(chave + ": " + conjunto));
+//    Resultado do agrupamento por idade:
+//            26: [Rafael, Daniele]
+//            27: [Victor]
+    }
+
+
 }
